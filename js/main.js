@@ -6,41 +6,35 @@ const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#webg
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// Add a simple cube
-const geometry = new THREE.BoxGeometry();
-const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-const cube = new THREE.Mesh(geometry, material);
-scene.add(cube);
+// Load a texture for the globe
+const textureLoader = new THREE.TextureLoader();
+const globeTexture = textureLoader.load('assets/globe.jpg');
 
-camera.position.z = 5;
+// Create the globe
+const globeGeometry = new THREE.SphereGeometry(1, 32, 32);
+const globeMaterial = new THREE.MeshStandardMaterial({ map: globeTexture });
+const globe = new THREE.Mesh(globeGeometry, globeMaterial);
+scene.add(globe);
 
-window.addEventListener('resize', () => {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
+camera.position.z = 3;
 
-    renderer.setSize(width, height);
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-});
+// Lighting
+const ambientLight = new THREE.AmbientLight(0x404040); // soft white light
+scene.add(ambientLight);
 
-// Add lighting
-const light = new THREE.DirectionalLight(0xffffff, 1);
-light.position.set(5, 5, 5).normalize();
-scene.add(light);
-
-
-
-
+const pointLight = new THREE.PointLight(0xffffff, 1);
+pointLight.position.set(5, 5, 5);
+scene.add(pointLight);
 
 // Animation loop
 function animate() {
     requestAnimationFrame(animate);
 
-    // Rotate the cube for some basic animation
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
+    // Rotate the globe
+    globe.rotation.y += 0.01;
 
     renderer.render(scene, camera);
 }
 
 animate();
+
