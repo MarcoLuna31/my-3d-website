@@ -8,6 +8,21 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 const textureLoader = new THREE.TextureLoader();
 const globeTexture = textureLoader.load('assets/globe.jpg');
 
+// verify texture
+const textureLoader = new THREE.TextureLoader();
+const globeTexture = textureLoader.load(
+    'assets/globe.jpg',
+    () => {
+        console.log('Texture loaded successfully');
+    },
+    undefined,
+    (error) => {
+        console.error('An error occurred loading the texture:', error);
+    }
+);
+
+
+
 // Create the globe
 const globeGeometry = new THREE.SphereGeometry(1, 32, 32);
 const globeMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
