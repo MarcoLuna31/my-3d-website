@@ -10,7 +10,7 @@ const globeTexture = textureLoader.load('assets/globe.jpg');
 
 // Create the globe
 const globeGeometry = new THREE.SphereGeometry(1, 32, 32);
-const globeMaterial = new THREE.MeshStandardMaterial({ map: globeTexture });
+const globeMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 const globe = new THREE.Mesh(globeGeometry, globeMaterial);
 scene.add(globe);
 
