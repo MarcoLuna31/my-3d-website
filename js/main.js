@@ -28,12 +28,7 @@ const light = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(5, 5, 5).normalize();
 scene.add(light);
 
-// Add a sphere
-const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
-const sphereMaterial = new THREE.MeshPhongMaterial({ color: 0xff0000 });
-const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-sphere.position.x = -3;
-scene.add(sphere);
+
 
 
 
